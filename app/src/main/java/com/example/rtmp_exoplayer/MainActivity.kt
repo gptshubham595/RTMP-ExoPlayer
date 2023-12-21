@@ -30,10 +30,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.streamButton.setOnClickListener {
             //adding a fragment
-            val video = filesDir.absolutePath + "/chand.mp4";
+            val video = filesDir.absolutePath + "/test.mp4";
             Log.d("FFMPEG", "Video path: $video")
             try {
-                FFmpeg.execute("-re -i $video -c copy -f flv rtmp://192.168.147.109/live/test")
+                FFmpeg.execute("-re -i $video -c copy -f flv ${binding.whereToStreamUrlEditText.text.toString()}")
             } catch (e: Exception) {
                 // Handle if FFmpeg is already running
                 e.printStackTrace()
