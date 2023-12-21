@@ -58,7 +58,6 @@ class PlayerFragment : Fragment() {
     /**
      * Play RTMP
      */
-    @SuppressLint("UnsafeOptInUsageError")
     private fun playVideo() {
         val videoSource = ProgressiveMediaSource.Factory(RtmpDataSource.Factory())
             .createMediaSource(MediaItem.fromUri(Uri.parse(url)))

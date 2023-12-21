@@ -14,7 +14,7 @@
             android:background="@color/white" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/urlEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="48dp"
@@ -25,14 +25,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/playButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="play"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editText" />
+            app:layout_constraintTop_toBottomOf="@id/urlEditText" />
+
+        <Button
+            android:id="@+id/streamButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Stream"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/playButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
