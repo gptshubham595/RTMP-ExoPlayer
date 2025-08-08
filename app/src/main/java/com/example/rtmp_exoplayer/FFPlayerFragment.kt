@@ -117,7 +117,7 @@ class FFPlayerFragment : Fragment() {
 
         @JvmStatic
         fun newInstance(url: String) =
-            HLSPlayerFragment().apply {
+            FFPlayerFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_URL, url)
                 }
