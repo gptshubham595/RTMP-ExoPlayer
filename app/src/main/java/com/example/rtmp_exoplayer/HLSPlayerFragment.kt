@@ -28,15 +28,17 @@ class HLSPlayerFragment : Fragment() {
 
     private var player: ExoPlayer? = null
 
-    // The RTMP stream to pull from.
-    private val rtmpInputUrl = "rtmp://172.20.33.176/live/stream"
+    lateinit var rtmpInputUrl: String
 
-    // Configuration for our HLS output. No server needed.
     private lateinit var hlsDirectory: File
     private val hlsFileName = "stream.m3u8"
     private lateinit var hlsFile: File
     private val localHlsUri by lazy { Uri.fromFile(hlsFile) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        rtmpInputUrl = arguments?.getString(ARG_URL) ?:""
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

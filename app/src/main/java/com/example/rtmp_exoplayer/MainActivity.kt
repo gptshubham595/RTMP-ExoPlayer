@@ -3,6 +3,7 @@ package com.example.rtmp_exoplayer
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.arthenica.mobileffmpeg.FFmpeg
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.playButton.setOnClickListener {
-            //adding a fragment
+            binding.fragmentContainer.visibility = View.VISIBLE
             val playerFragment = PlayerFragment.newInstance(binding.urlEditText.text.toString())
             val transactionManager = supportFragmentManager.beginTransaction()
             transactionManager.add(R.id.fragmentContainer, playerFragment)
@@ -28,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.playButtonHLS.setOnClickListener {
-            //adding a fragment
-            val playerFragment = HLSPlayerFragment.newInstance(binding.urlEditTextHLS.text.toString())
+            binding.fragmentContainer.visibility = View.VISIBLE
+            val playerFragment = FFPlayerFragment.newInstance(binding.urlEditTextHLS.text.toString())
             val transactionManager = supportFragmentManager.beginTransaction()
             transactionManager.add(R.id.fragmentContainer, playerFragment)
             transactionManager.addToBackStack("PLAYER_FRAGMENT")
@@ -37,13 +38,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.streamButton.setOnClickListener {
-            //adding a fragment
+            binding.fragmentContainer.visibility = View.VISIBLE
             val video = filesDir.absolutePath + "/test.mp4";
             Log.d("FFMPEG", "Video path: $video")
             try {
                 FFmpeg.execute("-re -i $video -c copy -f flv ${binding.whereToStreamUrlEditText.text}")
             } catch (e: Exception) {
-                // Handle if FFmpeg is already running
                 e.printStackTrace()
                 Log.w("FFMPEG", e.toString())
             }
