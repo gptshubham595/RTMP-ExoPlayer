@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,6 +11,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white" />
+
+        <EditText
+            android:id="@+id/urlEditTextHLS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="48dp"
+            android:layout_marginRight="48dp"
+            android:hint="rtmp://127.0.0.1:1935/stream"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toTopOf="@id/playButtonHLS" />
+
+
+        <Button
+            android:id="@+id/playButtonHLS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="play HLS"
+            app:layout_constraintBottom_toTopOf="@id/urlEditText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <EditText
             android:id="@+id/urlEditText"

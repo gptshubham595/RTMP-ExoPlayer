@@ -2,7 +2,6 @@ package com.example.rtmp_exoplayer
 
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,7 @@ import com.example.rtmp_exoplayer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,8 +20,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.playButton.setOnClickListener {
             //adding a fragment
-            val playerFragment = PlayerFragment.newInstance()
-            playerFragment.arguments = getBundleArguments()
+            val playerFragment = PlayerFragment.newInstance(binding.urlEditText.text.toString())
+            val transactionManager = supportFragmentManager.beginTransaction()
+            transactionManager.add(R.id.fragmentContainer, playerFragment)
+            transactionManager.addToBackStack("PLAYER_FRAGMENT")
+            transactionManager.commit()
+        }
+
+        binding.playButtonHLS.setOnClickListener {
+            //adding a fragment
+            val playerFragment = HLSPlayerFragment.newInstance(binding.urlEditTextHLS.text.toString())
             val transactionManager = supportFragmentManager.beginTransaction()
             transactionManager.add(R.id.fragmentContainer, playerFragment)
             transactionManager.addToBackStack("PLAYER_FRAGMENT")
@@ -33,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             val video = filesDir.absolutePath + "/test.mp4";
             Log.d("FFMPEG", "Video path: $video")
             try {
-                FFmpeg.execute("-re -i $video -c copy -f flv ${binding.whereToStreamUrlEditText.text.toString()}")
+                FFmpeg.execute("-re -i $video -c copy -f flv ${binding.whereToStreamUrlEditText.text}")
             } catch (e: Exception) {
                 // Handle if FFmpeg is already running
                 e.printStackTrace()
@@ -42,9 +50,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getBundleArguments(): Bundle {
-        return Bundle().apply {
-            putString("url", binding.urlEditText.text.toString())
-        }
-    }
 }
