@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.playButtonHLS.setOnClickListener {
             binding.fragmentContainer.visibility = View.VISIBLE
-            val playerFragment = FFPlayerFragment.newInstance(binding.urlEditTextHLS.text.toString())
+            val playerFragment = HLSPlayerFragment.newInstance(binding.urlEditTextHLS.text.toString())
             val transactionManager = supportFragmentManager.beginTransaction()
             transactionManager.add(R.id.fragmentContainer, playerFragment)
             transactionManager.addToBackStack("PLAYER_FRAGMENT")
